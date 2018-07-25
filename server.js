@@ -11,8 +11,17 @@ app.use(express.json());
 
 app.listen(port);
 
-//middleware
+mongoose.connect('mongodb://localhost:27017/beers', {
+    useNewUrlParser: true
+});
 
+mongoose.connection.on('connected', () => {
+    console.log('connected to beers database!');
+});
+
+mongoose.connection.on('error', (err) => {
+    console.log('uh oh ' + err);
+});
 
 console.log('Listening on port 8080');
 
